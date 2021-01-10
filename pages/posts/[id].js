@@ -43,27 +43,21 @@ const Post = ({post = []}) => {
     </>
 }
 
-// export async function getStaticPaths() {
-//     const dev = process.env.NODE_ENV !== 'production';
-//     //const server = dev ? 'http://localhost:3000' : 'https://fiveminutesread.netlify.app';
-//     const server = dev ? `http://localhost:3000` : `https://fiveminutesread.netlify.app`;
-//     const {posts} = await fetch(`${server}/api/posts`).then(res => res.json());
-//     const paths = posts.posts.map(post => ({
-//         params: {id: post.id}
-//     }));
-//     return {paths, fallback: false};
-// }
+export async function getStaticPaths() {
+    const {posts} = await fetch(`https://fiveminutesread-blog.vercel.app/api/posts`).then(res => res.json());
+    const paths = posts.posts.map(post => ({
+        params: {id: post.id}
+    }));
+    return {paths, fallback: false};
+}
 
-// export async function getStaticProps({params}) {
-//     const dev = process.env.NODE_ENV !== 'production';
-//     //const server = dev ? 'http://localhost:3000' : 'https://fiveminutesread.netlify.app';
-//     const server = dev ? `http://localhost:3000` : `https://fiveminutesread.netlify.app`;
-//     const {post} = await fetch(`${server}/api/posts/${params.id}`).then(res => res.json());
-//     return {
-//         props: {
-//             post
-//         }
-//     }
-// }
+export async function getStaticProps({params}) {
+    const {post} = await fetch(`https://fiveminutesread-blog.vercel.app/api/posts/${params.id}`).then(res => res.json());
+    return {
+        props: {
+            post
+        }
+    }
+}
 
 export default Post;
