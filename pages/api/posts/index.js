@@ -51,10 +51,7 @@ const posts = {
   ]
 }
 
-export default (req, res) => {
-  // res.statusCode = 200;
-  // res.json({posts});
-  Post.find().then(posts => {
-    res.json({posts});
-  });
+export default async (req, res) => {
+  res.status(200);
+  res.json({posts});
 }
